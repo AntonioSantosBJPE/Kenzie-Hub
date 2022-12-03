@@ -12,8 +12,12 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { api } from "../../services/api";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-export function DashboardPage({ loggedUser, setLoggedUser }) {
+export function DashboardPage() {
+  const { loggedUser, setLoggedUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   useEffect(() => {
     !localStorage.getItem("@TOKEN") && navigate("/");

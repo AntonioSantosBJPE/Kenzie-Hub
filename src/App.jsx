@@ -2,9 +2,8 @@ import { GlobalStyle } from "./styles/global";
 import { RoutesApp } from "./routes/index";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+
 export function App() {
-  const [loggedUser, setLoggedUser] = useState({});
   return (
     <div className="App">
       <GlobalStyle />
@@ -18,7 +17,7 @@ export function App() {
         draggable
         pauseOnHover={false}
       />
-      <RoutesApp setLoggedUser={setLoggedUser} loggedUser={loggedUser} />
+      <RoutesApp />
     </div>
   );
 }

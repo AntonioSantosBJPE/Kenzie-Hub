@@ -12,12 +12,17 @@ import { LoginformSchema } from "./loginFormSchema.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-export function LoginPage({ setLoggedUser }) {
+export function LoginPage() {
+  const { setLoggedUser } = useContext(UserContext);
+  const [loginLoading, setLoginLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(LoginformSchema),
   });
@@ -26,6 +31,7 @@ export function LoginPage({ setLoggedUser }) {
 
   async function onSubmitLogin(data) {
     try {
+      setLoginLoading(true);
       const response = await api.post("/sessions", data);
       toast.success("Login realizado com sucesso!");
       localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
@@ -36,6 +42,7 @@ export function LoginPage({ setLoggedUser }) {
       console.error(error);
       toast.error("Ops! Algo deu errado, faça o login novamente");
     } finally {
+      setLoginLoading(false);
     }
   }
   return (
@@ -63,9 +70,9 @@ export function LoginPage({ setLoggedUser }) {
                 error={errors.password?.message}
               />
               <Button
-                name="Entrar"
+                name={loginLoading ? "Entrando..." : "Entrar"}
                 type="submit"
-                disabled={!isDirty}
+                disabled={loginLoading}
                 variant="primaryDefault"
               />
             </Form>

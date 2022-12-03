@@ -13,12 +13,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { RegisterformSchema } from "./registerFormSchema.js";
+import { useState } from "react";
 
 export function RegisterPage() {
+  const [loginLoading, setLoginLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(RegisterformSchema),
   });
@@ -28,6 +31,7 @@ export function RegisterPage() {
   async function onSubmitRegister(data) {
     delete data.passwordConfirmation;
     try {
+      setLoginLoading(true);
       const response = await api.post("users", data);
       toast.success("Conta criada com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
@@ -38,6 +42,8 @@ export function RegisterPage() {
       toast.error("Ops! Algo deu errado, faça o cadastro novamente", {
         position: toast.POSITION.TOP_CENTER,
       });
+    } finally {
+      setLoginLoading(false);
     }
   }
 
@@ -131,9 +137,9 @@ export function RegisterPage() {
               </Select>
 
               <Button
-                name="Cadastrar"
+                name={loginLoading ? "Cadastrando..." : "Cadastrar"}
                 type="submit"
-                disabled={!isDirty}
+                disabled={loginLoading}
                 variant="primaryDefault"
               />
             </Form>
