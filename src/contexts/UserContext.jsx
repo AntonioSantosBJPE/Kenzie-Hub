@@ -1,8 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { api } from "../services/api";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("@TOKEN"));
+
+    async function requestUserProfile() {
+      try {
+        const response = await api.get("profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setLoggedUser(response.data);
+      } catch (error) {
+        localStorage.removeItem("@TOKEN");
+        localStorage.removeItem("@USERID");
+        console.error(error.response.data);
+      }
+    }
+
+    token && requestUserProfile();
+  }, []);
+
   const [loggedUser, setLoggedUser] = useState({});
 
   return (

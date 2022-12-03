@@ -11,7 +11,6 @@ import { Title } from "../../components/Title/index";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { api } from "../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -21,21 +20,6 @@ export function DashboardPage() {
   const navigate = useNavigate();
   useEffect(() => {
     !localStorage.getItem("@TOKEN") && navigate("/");
-
-    // const token = JSON.parse(localStorage.getItem("@TOKEN"));
-    // async function testeAugusto() {
-    //   try {
-    //     const response = await api.get("profile", {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     console.log(response.data);
-    //   } catch (error) {
-    //     console.error(error.response.data);
-    //   }
-    // }
-    // testeAugusto();
   }, []);
 
   function handleLogout() {
@@ -62,24 +46,34 @@ export function DashboardPage() {
           </Header>
         </StyledContainerCentral>
         <StyledSpanLine />
-        <StyledContainerCentral>
-          <StyledBoxInfosUser>
-            <Title type="title1BoldGrey0">Olá, {loggedUser.name}</Title>
-            <Title type="title3RegularGrey1">{loggedUser.course_module}</Title>
-          </StyledBoxInfosUser>
-        </StyledContainerCentral>
-        <StyledSpanLine />
-        <StyledContainerCentral>
-          <StyledBoxInfosPage>
-            <Title type="title1BoldGrey0">
-              Que pena! Estamos em desenvolvimento :(
-            </Title>
-            <Title type="title2RegularGrey0">
-              Nossa aplicação está em desenvolvimento, em breve teremos
-              novidades
-            </Title>
-          </StyledBoxInfosPage>
-        </StyledContainerCentral>
+        {Object.keys(loggedUser).length > 0 ? (
+          <>
+            <StyledContainerCentral>
+              <StyledBoxInfosUser>
+                <Title type="title1BoldGrey0">Olá, {loggedUser.name}</Title>
+                <Title type="title3RegularGrey1">
+                  {loggedUser.course_module}
+                </Title>
+              </StyledBoxInfosUser>
+            </StyledContainerCentral>
+            <StyledSpanLine />
+            <StyledContainerCentral>
+              <StyledBoxInfosPage>
+                <Title type="title1BoldGrey0">
+                  Que pena! Estamos em desenvolvimento :(
+                </Title>
+                <Title type="title2RegularGrey0">
+                  Nossa aplicação está em desenvolvimento, em breve teremos
+                  novidades
+                </Title>
+              </StyledBoxInfosPage>
+            </StyledContainerCentral>
+          </>
+        ) : (
+          <StyledContainerCentral>
+            <Title type="title1BoldGrey0">Carregando...</Title>
+          </StyledContainerCentral>
+        )}
       </StyledContainerDashboard>
     </>
   );
