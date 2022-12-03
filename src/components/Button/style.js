@@ -76,6 +76,10 @@ export const StyledButton = styled.button`
 
   color: var(--color-gray-0);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media (min-width: 450px) {
     font-size: 16px;
   }

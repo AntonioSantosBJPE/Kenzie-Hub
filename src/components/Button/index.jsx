@@ -1,6 +1,6 @@
 import { StyledButton } from "./style";
 
-export function Button({ name, type, variant, disabled, action }) {
+export function Button({ children, name, type, variant, disabled, action }) {
   return (
     <StyledButton
       type={type}
@@ -9,6 +9,7 @@ export function Button({ name, type, variant, disabled, action }) {
       onClick={action}
     >
       {name}
+      {children}
     </StyledButton>
   );
 }
