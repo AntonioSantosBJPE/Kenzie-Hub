@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { ListTechnologies } from "../../components/ListTechnologies/index";
 
 export function DashboardPage() {
   const { loggedUser, setLoggedUser } = useContext(UserContext);
@@ -58,15 +59,7 @@ export function DashboardPage() {
             </StyledContainerCentral>
             <StyledSpanLine />
             <StyledContainerCentral>
-              <StyledBoxInfosPage>
-                <Title type="title1BoldGrey0">
-                  Que pena! Estamos em desenvolvimento :(
-                </Title>
-                <Title type="title2RegularGrey0">
-                  Nossa aplicação está em desenvolvimento, em breve teremos
-                  novidades
-                </Title>
-              </StyledBoxInfosPage>
+              <ListTechnologies />
             </StyledContainerCentral>
           </>
         ) : (

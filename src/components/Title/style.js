@@ -24,6 +24,18 @@ export const StyledH3RegularGrey0 = styled.h3`
   }
 `;
 
+export const StyledH3BoldGrey0 = styled.h3`
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 28px;
+
+  color: var(--color-gray-0);
+
+  @media (min-width: 450px) {
+    font-size: 14px;
+  }
+`;
+
 export const StyledH4RegularGrey0 = styled.h4`
   font-weight: 400;
   font-size: 10px;

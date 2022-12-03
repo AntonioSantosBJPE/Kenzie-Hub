@@ -4,31 +4,33 @@ import { api } from "../services/api";
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@TOKEN"));
+  const token = JSON.parse(localStorage.getItem("@TOKEN"));
 
-    async function requestUserProfile() {
-      try {
-        const response = await api.get("profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setLoggedUser(response.data);
-      } catch (error) {
-        localStorage.removeItem("@TOKEN");
-        localStorage.removeItem("@USERID");
-        console.error(error.response.data);
-      }
+  async function requestUserProfile() {
+    try {
+      const response = await api.get("profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setLoggedUser(response.data);
+    } catch (error) {
+      localStorage.removeItem("@TOKEN");
+      localStorage.removeItem("@USERID");
+      console.error(error.response.data);
     }
+  }
 
+  useEffect(() => {
     token && requestUserProfile();
   }, []);
 
   const [loggedUser, setLoggedUser] = useState({});
 
   return (
-    <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+    <UserContext.Provider
+      value={{ loggedUser, setLoggedUser, requestUserProfile }}
+    >
       {children}
     </UserContext.Provider>
   );

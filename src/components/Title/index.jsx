@@ -3,6 +3,7 @@ import {
   StyledH3RegularGrey0,
   StyledH4RegularGrey0,
   StyledH4RegularGrey1,
+  StyledH3BoldGrey0,
 } from "./style";
 export function Title({ children, type }) {
   return (
@@ -15,6 +16,9 @@ export function Title({ children, type }) {
       )}
       {type === "title3RegularGrey0" && (
         <StyledH4RegularGrey0>{children}</StyledH4RegularGrey0>
+      )}
+      {type === "title3BoldGrey0" && (
+        <StyledH3BoldGrey0>{children}</StyledH3BoldGrey0>
       )}
       {type === "title3RegularGrey1" && (
         <StyledH4RegularGrey1>{children}</StyledH4RegularGrey1>
