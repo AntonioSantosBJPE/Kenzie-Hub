@@ -26,11 +26,19 @@ export function ListTechnologies() {
           <FiPlus size="1.5rem" />
         </Button>
       </StyledBoxRegisterTech>
-      <StyledListTechnology>
-        {loggedUser.techs.map((tech) => {
-          return <CardTech key={tech.id} tech={tech}></CardTech>;
-        })}
-      </StyledListTechnology>
+      {loggedUser.techs.length > 0 ? (
+        <StyledListTechnology>
+          {loggedUser.techs.map((tech) => {
+            return <CardTech key={tech.id} tech={tech}></CardTech>;
+          })}
+        </StyledListTechnology>
+      ) : (
+        <StyledBoxRegisterTech>
+          <Title type="title1BoldGrey0">
+            Não existem tecnologias cadastradas!
+          </Title>
+        </StyledBoxRegisterTech>
+      )}
     </>
   );
 }
