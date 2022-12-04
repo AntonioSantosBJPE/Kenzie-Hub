@@ -1,5 +1,10 @@
 import { UserProvider } from "../../contexts/UserContext";
+import { TechProvider } from "../../contexts/TechContext";
 
 export function Providers({ children }) {
-  return <UserProvider>{children}</UserProvider>;
+  return (
+    <UserProvider>
+      <TechProvider>{children}</TechProvider>
+    </UserProvider>
+  );
 }

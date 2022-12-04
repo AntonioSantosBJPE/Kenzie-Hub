@@ -9,6 +9,7 @@ const ButtonVariant = {
 
     border: 1px solid var(--color-primary);
     background-color: var(--color-primary);
+    color: var(--color-gray-0);
 
     &:hover {
       border: 1px solid var(--color-primary-hover);
@@ -33,6 +34,7 @@ const ButtonVariant = {
 
     border: 1px solid var(--color-gray-1);
     background-color: var(--color-gray-1);
+    color: var(--color-gray-0);
 
     &:hover {
       border: 1px solid var(--color-gray-2);
@@ -50,10 +52,26 @@ const ButtonVariant = {
 
     border: 1px solid var(--color-gray-3);
     background-color: var(--color-gray-3);
+    color: var(--color-gray-0);
 
     &:hover {
       border: 1px solid var(--color-gray-2);
       background-color: var(--color-gray-2);
+    }
+
+    @media (min-width: 450px) {
+      height: 38px;
+    }
+  `,
+  borderNone: css`
+    height: 32px;
+
+    border: none;
+    background-color: transparent;
+    color: var(--color-gray-1);
+
+    &:hover {
+      opacity: 50%;
     }
 
     @media (min-width: 450px) {
@@ -73,8 +91,6 @@ export const StyledButton = styled.button`
   font-weight: 500;
   font-size: 12px;
   line-height: 26px;
-
-  color: var(--color-gray-0);
 
   display: flex;
   align-items: center;

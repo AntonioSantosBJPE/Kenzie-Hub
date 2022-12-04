@@ -7,10 +7,10 @@ export function RoutesApp() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   );

@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { ListTechnologies } from "../../components/ListTechnologies/index";
+import { Modal } from "../../components/Modal";
 
 export function DashboardPage() {
   const { loggedUser, setLoggedUser } = useContext(UserContext);
@@ -30,10 +31,11 @@ export function DashboardPage() {
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@USERID");
     setLoggedUser({});
-    navigate("/");
+    navigate("/login");
   }
   return (
     <>
+      <Modal />
       <StyledContainerDashboard>
         <StyledContainerCentral>
           <Header alignJustify="space-between">

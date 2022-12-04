@@ -36,7 +36,7 @@ export function RegisterPage() {
       toast.success("Conta criada com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
       });
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error(error.response.data.message);
       toast.error("Ops! Algo deu errado, faça o cadastro novamente", {
@@ -52,7 +52,7 @@ export function RegisterPage() {
       <StyledContainer>
         <StyledContainerRegister>
           <Header alignJustify="space-between">
-            <LinkNavigation to="/" variant="grey3Medium" name="Voltar" />
+            <LinkNavigation to="/login" variant="grey3Medium" name="Voltar" />
           </Header>
           <StyledBoxForm>
             <Title type="title1BoldGrey0">Crie sua conta</Title>

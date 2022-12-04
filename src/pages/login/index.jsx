@@ -37,7 +37,7 @@ export function LoginPage() {
       localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
       localStorage.setItem("@USERID", JSON.stringify(response.data.user.id));
       setLoggedUser(response.data.user);
-      navigate("dashboard");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
       toast.error("Ops! Algo deu errado, faça o login novamente");
@@ -78,7 +78,7 @@ export function LoginPage() {
             </Form>
             <Title type="title3RegularGrey1">Ainda não possui uma conta?</Title>
             <LinkNavigation
-              to="register"
+              to="/register"
               variant="grey1Default"
               name="Cadastre-se"
             />
