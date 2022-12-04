@@ -40,6 +40,10 @@ const ButtonVariant = {
       border: 1px solid var(--color-gray-2);
       background-color: var(--color-gray-2);
     }
+    &:disabled {
+      border: 1px solid var(--color-gray-4);
+      background-color: var(--color-gray-4);
+    }
 
     @media (min-width: 450px) {
       height: 48px;

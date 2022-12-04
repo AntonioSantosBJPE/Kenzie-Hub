@@ -12,6 +12,8 @@ export const StyledCardTech = styled.li`
   padding: 12px;
   background-color: var(--color-gray-4);
 
+  cursor: pointer;
+
   &:hover {
     background-color: var(--color-gray-2);
   }

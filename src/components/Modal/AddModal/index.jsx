@@ -12,16 +12,12 @@ import { Form } from "../../Form";
 import { Title } from "../../Title";
 import { useContext } from "react";
 import { TechContext } from "../../../contexts/TechContext";
-import { UserContext } from "../../../contexts/UserContext";
 import { useForm } from "react-hook-form";
 import { AddModalformSchema } from "./AddModalFormSchema.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../../services/api";
-import { toast } from "react-toastify";
 
 export function AddModal() {
-  const { actionCloseModal } = useContext(TechContext);
-  const { requestUserProfile } = useContext(UserContext);
+  const { actionCloseModal, onSubmitRegisterTech } = useContext(TechContext);
 
   const {
     register,
@@ -30,25 +26,6 @@ export function AddModal() {
   } = useForm({
     resolver: yupResolver(AddModalformSchema),
   });
-
-  async function onSubmitRegisterTech(data) {
-    const token = JSON.parse(localStorage.getItem("@TOKEN"));
-
-    try {
-      const response = await api.post("users/techs", data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      toast.success("Tecnologia cadastrada!");
-      requestUserProfile();
-      actionCloseModal();
-    } catch (error) {
-      console.error(error.response);
-      toast.error(
-        "Ops! Não é permitido criar duas tecnologias com o mesmo nome"
-      );
-    } finally {
-    }
-  }
 
   return (
     <StyledModalWrap>

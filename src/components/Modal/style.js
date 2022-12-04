@@ -47,3 +47,16 @@ export const StyledBoxForm = styled.div`
   padding: 20px 15px;
   background-color: var(--color-gray-3);
 `;
+
+export const StyledBoxButtons = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 5%;
+
+  button:nth-child(1) {
+    width: 60%;
+  }
+  button:nth-child(2) {
+    width: 35%;
+  }
+`;

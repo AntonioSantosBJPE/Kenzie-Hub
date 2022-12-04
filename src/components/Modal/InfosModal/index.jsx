@@ -3,6 +3,7 @@ import {
   StyledModal,
   StyledModalHeader,
   StyledBoxForm,
+  StyledBoxButtons,
 } from "../style";
 import { Input } from "../../Input";
 import { Select } from "../../Select";
@@ -14,7 +15,8 @@ import { useContext } from "react";
 import { TechContext } from "../../../contexts/TechContext";
 
 export function InfosModal() {
-  const { actionCloseModal } = useContext(TechContext);
+  const { actionCloseModal, editTech, deleteTechnology, loading } =
+    useContext(TechContext);
   return (
     <StyledModalWrap>
       <StyledModal>
@@ -30,7 +32,33 @@ export function InfosModal() {
             <FiX />
           </Button>
         </StyledModalHeader>
-        <StyledBoxForm></StyledBoxForm>
+        <StyledBoxForm>
+          <Form>
+            <Input label="title" labelName="Nome" type="text" disabled={true} />
+            <Select label="status" labelName="Selecionar status">
+              <option value="">Selecionar status</option>
+              <option value="Iniciante">Iniciante</option>
+              <option value="Intermediário">Intermediário</option>
+              <option value="Avançado">Avançado</option>
+            </Select>
+            <StyledBoxButtons>
+              <Button
+                type="submit"
+                variant="primaryDefault"
+                name="Salvar alterações"
+              />
+              <Button
+                type="button"
+                variant="grey1Default"
+                name={loading ? "Excluindo..." : "Excluir"}
+                disabled={loading}
+                action={() => {
+                  deleteTechnology();
+                }}
+              />
+            </StyledBoxButtons>
+          </Form>
+        </StyledBoxForm>
       </StyledModal>
     </StyledModalWrap>
   );
