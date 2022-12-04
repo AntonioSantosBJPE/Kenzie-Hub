@@ -44,6 +44,10 @@ export const StyledContainerInput = styled.div`
     border: 1px solid var(--color-gray-0);
   }
 
+  input:disabled {
+    color: var(--color-gray-1);
+  }
+
   @media (min-width: 450px) {
     label,
     p {

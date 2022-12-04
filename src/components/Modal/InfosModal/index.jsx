@@ -13,10 +13,28 @@ import { Form } from "../../Form";
 import { Title } from "../../Title";
 import { useContext } from "react";
 import { TechContext } from "../../../contexts/TechContext";
+import { useForm } from "react-hook-form";
+import { InfosModalformSchema } from "./InfosModalFormSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export function InfosModal() {
-  const { actionCloseModal, editTech, deleteTechnology, loading } =
-    useContext(TechContext);
+  const {
+    actionCloseModal,
+    editTech,
+    deleteTechnology,
+    loading,
+    onSubmitEditTech,
+  } = useContext(TechContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(InfosModalformSchema),
+    defaultValues: { title: editTech.title, status: editTech.status },
+  });
+
   return (
     <StyledModalWrap>
       <StyledModal>
@@ -33,9 +51,20 @@ export function InfosModal() {
           </Button>
         </StyledModalHeader>
         <StyledBoxForm>
-          <Form>
-            <Input label="title" labelName="Nome" type="text" disabled={true} />
-            <Select label="status" labelName="Selecionar status">
+          <Form action={handleSubmit(onSubmitEditTech)}>
+            <Input
+              label="title"
+              labelName="Nome"
+              type="text"
+              disabled={true}
+              linkForm={register("title")}
+            />
+            <Select
+              label="status"
+              labelName="Selecionar status"
+              linkForm={register("status")}
+              error={errors.status?.message}
+            >
               <option value="">Selecionar status</option>
               <option value="Iniciante">Iniciante</option>
               <option value="Intermediário">Intermediário</option>
@@ -45,7 +74,8 @@ export function InfosModal() {
               <Button
                 type="submit"
                 variant="primaryDefault"
-                name="Salvar alterações"
+                name={loading ? "Salvando..." : "Salvar alterações"}
+                disabled={loading}
               />
               <Button
                 type="button"

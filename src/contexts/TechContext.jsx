@@ -31,6 +31,7 @@ export function TechProvider({ children }) {
       const response = await api.post("users/techs", data, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      setLoading(true);
       toast.success("Tecnologia cadastrada!");
       requestUserProfile();
       actionCloseModal();
@@ -40,6 +41,25 @@ export function TechProvider({ children }) {
         "Ops! Não é permitido criar duas tecnologias com o mesmo nome"
       );
     } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onSubmitEditTech(data) {
+    const url = `users/techs/${editTech.id}`;
+    try {
+      const response = await api.put(url, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setLoading(true);
+      toast.success("Tecnologia editada!");
+      requestUserProfile();
+      actionCloseModal();
+    } catch (error) {
+      console.error(error.response);
+      toast.error("Ops! Algo deu errado!");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -74,6 +94,7 @@ export function TechProvider({ children }) {
         setEditTech,
         deleteTechnology,
         loading,
+        onSubmitEditTech,
       }}
     >
       {children}
