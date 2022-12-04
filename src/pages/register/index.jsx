@@ -7,16 +7,14 @@ import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { Title } from "../../components/Title";
 import { LinkNavigation } from "../../components/LinkNavigation";
-import { api } from "../../services/api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { RegisterformSchema } from "./registerFormSchema.js";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export function RegisterPage() {
-  const [loginLoading, setLoginLoading] = useState(false);
+  const { onSubmitRegister, loading } = useContext(UserContext);
 
   const {
     register,
@@ -25,27 +23,6 @@ export function RegisterPage() {
   } = useForm({
     resolver: yupResolver(RegisterformSchema),
   });
-
-  const navigate = useNavigate();
-
-  async function onSubmitRegister(data) {
-    delete data.passwordConfirmation;
-    try {
-      setLoginLoading(true);
-      const response = await api.post("users", data);
-      toast.success("Conta criada com sucesso!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      navigate("/login");
-    } catch (error) {
-      console.error(error.response.data.message);
-      toast.error("Ops! Algo deu errado, faça o cadastro novamente", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    } finally {
-      setLoginLoading(false);
-    }
-  }
 
   return (
     <>
@@ -137,9 +114,9 @@ export function RegisterPage() {
               </Select>
 
               <Button
-                name={loginLoading ? "Cadastrando..." : "Cadastrar"}
+                name={loading ? "Cadastrando..." : "Cadastrar"}
                 type="submit"
-                disabled={loginLoading}
+                disabled={loading}
                 variant="primaryDefault"
               />
             </Form>

@@ -6,18 +6,14 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Title } from "../../components/Title";
 import { LinkNavigation } from "../../components/LinkNavigation";
-import { api } from "../../services/api";
 import { useForm } from "react-hook-form";
 import { LoginformSchema } from "./loginFormSchema.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 export function LoginPage() {
-  const { setLoggedUser } = useContext(UserContext);
-  const [loginLoading, setLoginLoading] = useState(false);
+  const { onSubmitLogin, loading } = useContext(UserContext);
 
   const {
     register,
@@ -27,24 +23,6 @@ export function LoginPage() {
     resolver: yupResolver(LoginformSchema),
   });
 
-  const navigate = useNavigate();
-
-  async function onSubmitLogin(data) {
-    try {
-      setLoginLoading(true);
-      const response = await api.post("/sessions", data);
-      toast.success("Login realizado com sucesso!");
-      localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
-      localStorage.setItem("@USERID", JSON.stringify(response.data.user.id));
-      setLoggedUser(response.data.user);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error(error);
-      toast.error("Ops! Algo deu errado, faça o login novamente");
-    } finally {
-      setLoginLoading(false);
-    }
-  }
   return (
     <>
       <StyledContainer>
@@ -70,9 +48,9 @@ export function LoginPage() {
                 error={errors.password?.message}
               />
               <Button
-                name={loginLoading ? "Entrando..." : "Entrar"}
+                name={loading ? "Entrando..." : "Entrar"}
                 type="submit"
-                disabled={loginLoading}
+                disabled={loading}
                 variant="primaryDefault"
               />
             </Form>

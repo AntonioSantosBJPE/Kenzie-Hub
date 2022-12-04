@@ -17,7 +17,8 @@ import { AddModalformSchema } from "./AddModalFormSchema.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 export function AddModal() {
-  const { actionCloseModal, onSubmitRegisterTech } = useContext(TechContext);
+  const { loading, actionCloseModal, onSubmitRegisterTech } =
+    useContext(TechContext);
 
   const {
     register,
@@ -66,7 +67,8 @@ export function AddModal() {
             <Button
               type="submit"
               variant="primaryDefault"
-              name="Cadastrar Tecnologia"
+              name={loading ? "Cadastrando..." : "Cadastrar Tecnologia"}
+              disabled={loading}
             />
           </Form>
         </StyledBoxForm>

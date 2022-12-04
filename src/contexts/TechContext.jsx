@@ -11,8 +11,9 @@ export function TechProvider({ children }) {
   const [typeModal, setTypeModal] = useState("");
   const [editTech, setEditTech] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingDeleteTech, setLoadingDeleteTech] = useState(false);
 
-  const { requestUserProfile, loggedUser } = useContext(UserContext);
+  const { requestUserProfile } = useContext(UserContext);
 
   const token = JSON.parse(localStorage.getItem("@TOKEN"));
 
@@ -32,16 +33,20 @@ export function TechProvider({ children }) {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLoading(true);
-      toast.success("Tecnologia cadastrada!");
-      requestUserProfile();
-      actionCloseModal();
+      setTimeout(() => {
+        toast.success("Tecnologia cadastrada!");
+        requestUserProfile();
+        actionCloseModal();
+      }, 500);
     } catch (error) {
       console.error(error.response);
       toast.error(
         "Ops! Não é permitido criar duas tecnologias com o mesmo nome"
       );
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   }
 
@@ -52,14 +57,18 @@ export function TechProvider({ children }) {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLoading(true);
-      toast.success("Tecnologia editada!");
-      requestUserProfile();
-      actionCloseModal();
+      setTimeout(() => {
+        toast.success("Tecnologia editada!");
+        requestUserProfile();
+        actionCloseModal();
+      }, 500);
     } catch (error) {
       console.error(error.response);
       toast.error("Ops! Algo deu errado!");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   }
 
@@ -70,15 +79,19 @@ export function TechProvider({ children }) {
       const response = await api.delete(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLoading(true);
-      toast.success("Tecnologia apagada!");
-      requestUserProfile();
-      actionCloseModal();
+      setLoadingDeleteTech(true);
+      setTimeout(() => {
+        toast.success("Tecnologia apagada!");
+        requestUserProfile();
+        actionCloseModal();
+      }, 500);
     } catch (error) {
       console.error(error.response);
       toast.error("Ops! Algo deu errado!");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoadingDeleteTech(false);
+      }, 500);
     }
   }
 
@@ -94,6 +107,7 @@ export function TechProvider({ children }) {
         setEditTech,
         deleteTechnology,
         loading,
+        loadingDeleteTech,
         onSubmitEditTech,
       }}
     >

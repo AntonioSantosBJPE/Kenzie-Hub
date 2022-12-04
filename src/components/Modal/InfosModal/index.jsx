@@ -23,6 +23,7 @@ export function InfosModal() {
     editTech,
     deleteTechnology,
     loading,
+    loadingDeleteTech,
     onSubmitEditTech,
   } = useContext(TechContext);
 
@@ -80,8 +81,8 @@ export function InfosModal() {
               <Button
                 type="button"
                 variant="grey1Default"
-                name={loading ? "Excluindo..." : "Excluir"}
-                disabled={loading}
+                name={loadingDeleteTech ? "Excluindo..." : "Excluir"}
+                disabled={loadingDeleteTech}
                 action={() => {
                   deleteTechnology();
                 }}
