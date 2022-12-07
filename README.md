@@ -28,11 +28,15 @@
 ## :rocket: Rodando o projeto
 
 Para rodar o repositório é necessário clonar o mesmo, e dar o seguinte comando para iniciar o projeto:
+
 ```
-<yarn install>
+git clone git@github.com:AntonioSantosBJPE/Kenzie-Hub.git
 ```
 ```
-<yarn dev>
+yarn install
+```
+```
+yarn dev
 ```
 ou acesse a aplicação pelo site: <a href="https://react-entrega-kenzie-hub-complete-antonio-santos-bjpe.vercel.app/" target="_blank"> Kenzie Hub</a>
 
