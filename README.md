@@ -3,7 +3,7 @@
 ## :memo: Descrição
 
  O projeto é um hub de portfólios de programadores, fictícios, onde o usuário pode realizar o seu cadastro na plataforma, o seu login, e posteriormente cadastrar suas habilidades em tecnologia.
- A aplicação faz uso da api  <a href="https://github.com/Kenzie-Academy-Brasil-Developers/kenziehub-api" target="_blank"> Kenzie Hubr</a> , de propriedade da Kenzie, e foi desenvolvida durante
+ A aplicação faz uso da api  <a href="https://github.com/Kenzie-Academy-Brasil-Developers/kenziehub-api" target="_blank"> Kenzie Hub</a> , de propriedade da Kenzie, e foi desenvolvida durante
  o terceiro módulo do curso de desenvolvimento fullstack da instituição.
 
 
@@ -26,10 +26,16 @@
 - API Rest;
 
 ## :rocket: Rodando o projeto
-Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
+
+Para rodar o repositório é necessário clonar o mesmo, e dar o seguinte comando para iniciar o projeto:
 ```
-<>
+<yarn install>
 ```
+```
+<yarn dev>
+```
+ou acesse a aplicação pelo site: <a href="https://react-entrega-kenzie-hub-complete-antonio-santos-bjpe.vercel.app/" target="_blank"> Kenzie Hub</a>
+
 
 ## :soon: Implementação futura
 
